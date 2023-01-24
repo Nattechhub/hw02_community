@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class Group(models.Model):
     title = models.CharField(
         max_length=200,
@@ -13,9 +14,11 @@ class Group(models.Model):
         max_length=400,
         verbose_name="Описание"
     )
-    
+
     def _str_(self):
         return self.title
+
+
 class Post(models.Model):
     text = models.TextField(verbose_name="Содержание")
     pub_date = models.DateTimeField(
@@ -33,8 +36,7 @@ class Post(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name='posts'
-    ) 
+    )
 
     def _str_(self):
         return self.text
-
