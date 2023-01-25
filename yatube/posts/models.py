@@ -15,12 +15,17 @@ class Group(models.Model):
         verbose_name="Описание"
     )
 
+    class Meta:
+        verbose_name = 'Группы'
+
     def _str_(self):
         return self.title
 
 
 class Post(models.Model):
-    text = models.TextField(verbose_name="Содержание")
+    text = models.TextField(
+        verbose_name="Содержание"
+    )
     pub_date = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Дата"
@@ -35,8 +40,13 @@ class Post(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='posts'
+        related_name='posts',
+        verbose_name='Автор'
     )
+
+    class Meta:
+        ordering = ['-pub_date']
+        verbose_name = 'Посты'
 
     def _str_(self):
         return self.text

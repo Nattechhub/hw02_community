@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>
-{% block title %}
-Последние обновления на сайте
-{% endblock %}
-</h1>
+  {% block title %}
+  Последние обновления на сайте
+  {% endblock %}
 {% for post in posts %}
   <ul>
-    <li>
+    <h1>
+      <li>
       Автор: {{ post.author.get_full_name }}
-    </li>
+      </li>
+    </h1>
     <li>
       Дата публикации: {{ post.pub_date|date:'d E Y' }}
     </li>
