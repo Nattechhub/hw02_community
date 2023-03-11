@@ -1,25 +1,26 @@
 {% extends 'base.html' %}
+{% block title %}Последние обновления на сайте{% endblock %}
+{% block header %}Последние обновления на сайте{% endblock %}
 {% block content %}
-  {% block title %}
-  Последние обновления на сайте
-  {% endblock %}
-{% for post in posts %}
+<h1>Последние обновления на сайте</h1>
+<article>
+{% for post in page_obj %}
   <ul>
-    <h1>
-      <li>
-      Автор: {{ post.author.get_full_name }}
-      </li>
-    </h1>
+    <li>
+    Автор: {{ post.author.get_full_name }}
+    </li>
     <li>
       Дата публикации: {{ post.pub_date|date:'d E Y' }}
     </li>
   </ul>
   <p>{{ post.text }}</p>
-  {% if post.group %}
-    <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+{% if post.group %}
+  <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
   {% endif %}
   {% if not forloop.last %}
     <hr>
   {% endif %}
 {% endfor %}
-{% endblock %}
+{% include 'includes/paginator.html' %}
+</article>
+{% endblock content %}
